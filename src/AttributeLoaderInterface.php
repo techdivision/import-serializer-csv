@@ -33,24 +33,13 @@ interface AttributeLoaderInterface
 {
 
     /**
-     * Loads and returns the attribute with the passed code from the database.
-     *
-     * @param string $attributeCode The code of the attribute to return
-     *
-     * @return array The attribute
-     */
-    public function loadAttributeByAttributeCode(string $attributeCode) : array;
-
-
-
-    /**
      * Return's an EAV entity type with the passed entity type code.
      *
      * @param string $entityTypeCode The code of the entity type to return
      *
      * @return array The entity type with the passed entity type code
      */
-    public function getEavEntityTypeByEntityTypeCode(string $entityTypeCode) : array;
+    public function getEavEntityTypeByEntityTypeCode(string $entityTypeCode);
 
 
     /**
@@ -61,5 +50,5 @@ interface AttributeLoaderInterface
      *
      * @return array The EAV attribute
      */
-    public function getEavAttributeByEntityTypeIdAndAttributeCode(int $entityTypeId, string $attributeCode) : array;
+    public function getEavAttributeByEntityTypeIdAndAttributeCode(int $entityTypeId, string $attributeCode);
 }
