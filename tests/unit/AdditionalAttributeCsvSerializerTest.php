@@ -21,6 +21,7 @@
 namespace TechDivision\Import\Serializer\Csv;
 
 use TechDivision\Import\Serializer\SerializerFactoryInterface;
+use TechDivision\Import\Serializer\Csv\Services\EavAttributeAwareProcessorInterface;
 
 /**
  * Test class for CSV additional attribute serializer implementation.
@@ -56,7 +57,7 @@ class AdditionalAttributeCsvSerializerTest extends AbstractSerializerTest
         $entityTypes = $this->getEntityTypes();
 
         // initialize the mock for the import processor
-        $attributeLoader = $this->getMockBuilder(AttributeLoaderInterface::class)->setMethods(get_class_methods(AttributeLoaderInterface::class))->getMock();
+        $attributeLoader = $this->getMockBuilder(EavAttributeAwareProcessorInterface::class)->setMethods(get_class_methods(EavAttributeAwareProcessorInterface::class))->getMock();
         $attributeLoader->expects($this->any())->method('getEavEntityTypeByEntityTypeCode')->willReturnCallback(function ($entityTypeCode) use ($entityTypes) {
             return $entityTypes[$entityTypeCode];
         });

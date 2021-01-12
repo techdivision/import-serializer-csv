@@ -26,6 +26,7 @@ use TechDivision\Import\Serializer\Configuration\ConfigurationInterface;
 use TechDivision\Import\Serializer\Configuration\SerializerConfigurationInterface;
 use TechDivision\Import\Serializer\Csv\Utils\MemberNames;
 use TechDivision\Import\Serializer\Csv\Utils\FrontendInputTypes;
+use TechDivision\Import\Serializer\Csv\Services\EavAttributeAwareProcessorInterface;
 
 /**
  * Serializer implementation that un-/serializes the additional product attribues found in the CSV file
@@ -71,26 +72,26 @@ class AdditionalAttributeCsvSerializer extends AbstractCsvSerializer
     /**
      * The attribute loader instance.
      *
-     * @var \TechDivision\Import\Serializer\Csv\AttributeLoaderInterface
+     * @var \TechDivision\Import\Serializer\Csv\Services\EavAttributeAwareProcessorInterface
      */
-    private $attributeLoader;
+    private $eavAttributeAwareProcessor;
 
     /**
      * Initialize the serializer with the passed CSV value serializer factory.
      *
-     * @param \TechDivision\Import\Serializer\Configuration\ConfigurationInterface $configuration             The configuration instance
-     * @param \TechDivision\Import\Serializer\Csv\AttributeLoaderInterface         $attributeLoader           The attribute loader instance
-     * @param \TechDivision\Import\Serializer\SerializerFactoryInterface           $valueCsvSerializerFactory The CSV value serializer factory
+     * @param \TechDivision\Import\Serializer\Configuration\ConfigurationInterface             $configuration             The configuration instance
+     * @param \TechDivision\Import\Serializer\Csv\Services\EavAttributeAwareProcessorInterface $attributeLoader           The attribute loader instance
+     * @param \TechDivision\Import\Serializer\SerializerFactoryInterface                       $valueCsvSerializerFactory The CSV value serializer factory
      */
     public function __construct(
         ConfigurationInterface $configuration,
-        AttributeLoaderInterface $attributeLoader,
+        EavAttributeAwareProcessorInterface $attributeLoader,
         SerializerFactoryInterface $valueCsvSerializerFactory
     ) {
 
         // set the passed instances
         $this->configuration = $configuration;
-        $this->attributeLoader = $attributeLoader;
+        $this->eavAttributeAwareProcessor = $attributeLoader;
         $this->valueCsvSerializerFactory = $valueCsvSerializerFactory;
 
         // load the entity type for the entity type defined in the configuration
@@ -140,13 +141,13 @@ class AdditionalAttributeCsvSerializer extends AbstractCsvSerializer
     }
 
     /**
-     * Returns the attribute loader instance.
+     * Returns the EAV attribute aware processor instance.
      *
-     * @return \TechDivision\Import\Serializer\Csv\AttributeLoaderInterface The attribute loader instance
+     * @return \TechDivision\Import\Serializer\Csv\Services\EavAttributeAwareProcessorInterface The EAV attribute aware processor instance
      */
-    protected function getAttributeLoader() : AttributeLoaderInterface
+    protected function getEavAttributeAwareProcessor() : EavAttributeAwareProcessorInterface
     {
-        return $this->attributeLoader;
+        return $this->eavAttributeAwareProcessor;
     }
 
     /**
@@ -188,7 +189,7 @@ class AdditionalAttributeCsvSerializer extends AbstractCsvSerializer
      */
     protected function loadAttributeByAttributeCode($attributeCode)
     {
-        return $this->getAttributeLoader()->getEavAttributeByEntityTypeIdAndAttributeCode($this->getEntityTypeId(), $attributeCode);
+        return $this->getEavAttributeAwareProcessor()->getEavAttributeByEntityTypeIdAndAttributeCode($this->getEntityTypeId(), $attributeCode);
     }
 
     /**

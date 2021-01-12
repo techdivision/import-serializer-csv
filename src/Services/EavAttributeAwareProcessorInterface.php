@@ -1,7 +1,7 @@
 <?php
 
 /**
- * TechDivision\Import\Serializers\AttributeLoaderInterface
+ * TechDivision\Import\Serializers\Services\EavAttributeAwareProcessorInterface
  *
  * NOTICE OF LICENSE
  *
@@ -18,10 +18,10 @@
  * @link      http://www.techdivision.com
  */
 
-namespace TechDivision\Import\Serializer\Csv;
+namespace TechDivision\Import\Serializer\Csv\Services;
 
 /**
- * Interface for attribute loader implementations.
+ * Interface for an EAV attribute aware processor implementations.
  *
  * @author    Tim Wagner <t.wagner@techdivision.com>
  * @copyright 2021 TechDivision GmbH <info@techdivision.com>
@@ -29,7 +29,7 @@ namespace TechDivision\Import\Serializer\Csv;
  * @link      https://github.com/techdivision/import-serializer-csv
  * @link      http://www.techdivision.com
  */
-interface AttributeLoaderInterface
+interface EavAttributeAwareProcessorInterface
 {
 
     /**
