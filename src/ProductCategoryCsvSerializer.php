@@ -231,14 +231,19 @@ class ProductCategoryCsvSerializer extends AbstractCsvSerializer
     public function normalize(string $path) : string
     {
 
+        // initialize the array for the normalized categories
         $normalized = array();
 
+        // unserialize the categories by using a comma (,)
         $categories = $this->unserialize($path);
 
+        // unserializie//serialize the category
+        // elements by using a slash (/)
         foreach ($categories as $category) {
             $normalized[] = $this->serialize($this->unserialize($category, $this->getCategoryDelimiter()), $this->getCategoryDelimiter());
         }
 
+        // return the normalized categories
         return $this->serialize($normalized);
     }
 }
