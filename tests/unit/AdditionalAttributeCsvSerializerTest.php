@@ -83,7 +83,7 @@ class AdditionalAttributeCsvSerializerTest extends AbstractSerializerTest
      */
     public function testSerializeEmptyArrayWithSuccess()
     {
-        $this->assertEquals(null, $this->additionalAttributeSerializer->serialize(array()));
+        $this->assertEquals(null, $this->additionalAttributeSerializer->normalize(array()));
     }
 
     /**
@@ -93,7 +93,7 @@ class AdditionalAttributeCsvSerializerTest extends AbstractSerializerTest
      */
     public function testSerializeWithSuccess()
     {
-        $this->assertEquals('ac_01=ov_01,ac_02=ov_02', $this->additionalAttributeSerializer->serialize(array('ac_01' => 'ov_01', 'ac_02' => 'ov_02')));
+        $this->assertEquals('ac_01=ov_01,ac_02=ov_02', $this->additionalAttributeSerializer->normalize(array('ac_01' => 'ov_01', 'ac_02' => 'ov_02')));
     }
 
     /**
@@ -103,7 +103,7 @@ class AdditionalAttributeCsvSerializerTest extends AbstractSerializerTest
      */
     public function testUnserializeEmptyArrayWithSuccess()
     {
-        $this->assertEquals(array(), $this->additionalAttributeSerializer->unserialize(null));
+        $this->assertEquals(array(), $this->additionalAttributeSerializer->denormalize(null));
     }
 
     /**
@@ -113,7 +113,7 @@ class AdditionalAttributeCsvSerializerTest extends AbstractSerializerTest
      */
     public function testUnserializeWithSuccess()
     {
-        $this->assertEquals(array('ac_01' => 'ov_01', 'ac_02' => 'ov_02'), $this->additionalAttributeSerializer->unserialize('"ac_01=ov_01","ac_02=ov_02"'));
+        $this->assertEquals(array('ac_01' => 'ov_01', 'ac_02' => 'ov_02'), $this->additionalAttributeSerializer->denormalize('"ac_01=ov_01","ac_02=ov_02"'));
     }
 
     /**
@@ -123,7 +123,7 @@ class AdditionalAttributeCsvSerializerTest extends AbstractSerializerTest
      */
     public function testUnserializeSingleAdditionalAttribute()
     {
-        $this->assertEquals(array('delivery_date_1' => '2019011'), $this->additionalAttributeSerializer->unserialize('"delivery_date_1=2019011"'));
+        $this->assertEquals(array('delivery_date_1' => '2019011'), $this->additionalAttributeSerializer->denormalize('"delivery_date_1=2019011"'));
     }
 
     /**
@@ -145,7 +145,7 @@ class AdditionalAttributeCsvSerializerTest extends AbstractSerializerTest
         );
 
         // unserialize the value and assert the result
-        $this->assertSame($values, $this->additionalAttributeSerializer->unserialize($value));
+        $this->assertSame($values, $this->additionalAttributeSerializer->denormalize($value));
     }
 
     /**
@@ -167,7 +167,7 @@ class AdditionalAttributeCsvSerializerTest extends AbstractSerializerTest
         );
 
         // unserialize the value and assert the result
-        $this->assertSame($values, $this->additionalAttributeSerializer->unserialize($value));
+        $this->assertSame($values, $this->additionalAttributeSerializer->denormalize($value));
     }
 
     /**
@@ -189,7 +189,7 @@ class AdditionalAttributeCsvSerializerTest extends AbstractSerializerTest
         );
 
         // unserialize the value and assert the result
-        $this->assertSame($values, $this->additionalAttributeSerializer->unserialize($value));
+        $this->assertSame($values, $this->additionalAttributeSerializer->denormalize($value));
     }
 
     /**
@@ -240,7 +240,7 @@ class AdditionalAttributeCsvSerializerTest extends AbstractSerializerTest
         $unserialized = $valueCsvSerializer->unserialize($value);
 
         // unserialize the value and assert the result
-        $this->assertSame($values, $this->additionalAttributeSerializer->unserialize(array_shift($unserialized)));
+        $this->assertSame($values, $this->additionalAttributeSerializer->denormalize(array_shift($unserialized)));
     }
 
     /**
@@ -268,7 +268,7 @@ class AdditionalAttributeCsvSerializerTest extends AbstractSerializerTest
         $unserialized = $valueCsvSerializer->unserialize($value);
 
         // unserialize the value and assert the result
-        $this->assertSame($values, $this->additionalAttributeSerializer->unserialize(array_shift($unserialized)));
+        $this->assertSame($values, $this->additionalAttributeSerializer->denormalize(array_shift($unserialized)));
     }
 
     /**
@@ -290,7 +290,7 @@ class AdditionalAttributeCsvSerializerTest extends AbstractSerializerTest
         );
 
         // serialize the values and assert the result
-        $this->assertSame($value, $this->additionalAttributeSerializer->serialize($values));
+        $this->assertSame($value, $this->additionalAttributeSerializer->normalize($values));
     }
 
     /**
@@ -311,6 +311,6 @@ class AdditionalAttributeCsvSerializerTest extends AbstractSerializerTest
         );
 
         // serialize the values and assert the result
-        $this->assertSame($value, $this->additionalAttributeSerializer->serialize($values));
+        $this->assertSame($value, $this->additionalAttributeSerializer->normalize($values));
     }
 }

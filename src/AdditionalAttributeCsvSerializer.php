@@ -278,12 +278,68 @@ class AdditionalAttributeCsvSerializer extends AbstractCsvSerializer
      */
     public function unserialize($serialized = null, $delimiter = null)
     {
+        return $this->getValueCsvSerializer()->explode($serialized, $delimiter ? $delimiter : $this->getMultipleFieldDelimiter());
+    }
+
+    /**
+     * Serializes the elements of the passed array.
+     *
+     * @param array|null  $unserialized The serialized data
+     * @param string|null $delimiter    The delimiter used to serialize the values
+     *
+     * @return string The serialized array
+     * @see \TechDivision\Import\Serializer\SerializerInterface::serialize()
+     */
+    public function serialize(array $unserialized = null, $delimiter = null)
+    {
+        return $this->getValueCsvSerializer()->implode($unserialized, $delimiter ? $delimiter : $this->getMultipleFieldDelimiter());
+    }
+
+    /**
+     * Extracts the elements of the passed value by exploding them
+     * with the also passed delimiter.
+     *
+     * @param string|null $value     The value to extract
+     * @param string|null $delimiter The delimiter used to extrace the elements
+     *
+     * @return array|null The exploded values
+     * @see \TechDivision\Import\Serializer\SerializerInterface::unserialize()
+     */
+    public function explode($value = null, $delimiter = null)
+    {
+        return $this->unserialize($value, $delimiter);
+    }
+
+    /**
+     * Compacts the elements of the passed value by imploding them
+     * with the also passed delimiter.
+     *
+     * @param array|null  $value     The values to compact
+     * @param string|null $delimiter The delimiter use to implode the values
+     *
+     * @return string|null The compatected value
+     * @see \TechDivision\Import\Serializer\SerializerInterface::serialize()
+     */
+    public function implode(array $value = null, $delimiter = null)
+    {
+        return $this->serialize($value, $delimiter);
+    }
+
+    /**
+     * Create a CSV compatible string from the passed category path.
+     *
+     * @param string|null $value The normalized category path (usually from the DB)
+     *
+     * @return array The array with the denormalized attribute values
+     */
+    public function denormalize(string $value = null) : array
+    {
 
         // initialize the array for the attributes
         $attrs = array();
 
         // explode the additional attributes
-        $additionalAttributes = $this->getValueCsvSerializer()->unserialize($serialized, $delimiter ? $delimiter : $this->getMultipleFieldDelimiter());
+        $additionalAttributes = $this->unserialize($value);
 
         // iterate over the attributes and append them to the row
         if (is_array($additionalAttributes)) {
@@ -299,58 +355,29 @@ class AdditionalAttributeCsvSerializer extends AbstractCsvSerializer
     }
 
     /**
-     * Serializes the elements of the passed array.
+     * Normalizes the category path in a standard representation.
      *
-     * @param array|null  $unserialized The serialized data
-     * @param string|null $delimiter    The delimiter used to serialize the values
+     * For example this means, that a category  path `Default Category/Gear`
+     * will be normalized into `"Default Category"/Gear`.
      *
-     * @return string The serialized array
-     * @see \TechDivision\Import\Serializer\SerializerInterface::serialize()
+     * @param array $values The category path that has to be normalized
+     *
+     * @return string The normalized category path
      */
-    public function serialize(array $unserialized = null, $delimiter = null)
+    public function normalize(array $values) : string
     {
 
         // initialize the array for the attributes
         $attrs = array();
 
         // iterate over the attributes and append them to the row
-        if (is_array($unserialized)) {
-            foreach ($unserialized as $attributeCode => $optionValue) {
+        if (is_array($values)) {
+            foreach ($values as $attributeCode => $optionValue) {
                 $attrs[] = sprintf('%s=%s', $attributeCode, $this->pack($attributeCode, $optionValue));
             }
         }
 
         // implode the array with the packed additional attributes and return it
-        return $this->getValueCsvSerializer()->serialize($attrs, $delimiter ? $delimiter : $this->getMultipleFieldDelimiter());
-    }
-
-    /**
-     * Extracts the elements of the passed value by exploding them
-     * with the also passed delimiter.
-     *
-     * @param string|null $value     The value to extract
-     * @param string|null $delimiter The delimiter used to extrace the elements
-     *
-     * @return array|null The exploded values
-     * @see \TechDivision\Import\Serializer\SerializerInterface::unserialize()
-     */
-    public function explode($value = null, $delimiter = null)
-    {
-        return $this->getValueCsvSerializer()->explode($value, $delimiter ? $delimiter : $this->getMultipleFieldDelimiter());
-    }
-
-    /**
-     * Compacts the elements of the passed value by imploding them
-     * with the also passed delimiter.
-     *
-     * @param array|null  $value     The values to compact
-     * @param string|null $delimiter The delimiter use to implode the values
-     *
-     * @return string|null The compatected value
-     * @see \TechDivision\Import\Serializer\SerializerInterface::serialize()
-     */
-    public function implode(array $value = null, $delimiter = null)
-    {
-        return $this->getValueCsvSerializer()->implode($value, $delimiter ? $delimiter : $this->getMultipleFieldDelimiter());
+        return $this->serialize($attrs);
     }
 }

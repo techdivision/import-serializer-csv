@@ -207,11 +207,12 @@ class ProductCategoryCsvSerializer extends AbstractCsvSerializer
     }
 
     /**
-     * Create a CSV compatible string from the passed category path.
+     * Denormalizes the passed path.
      *
-     * @param string The normalized category path (usually from the DB)
+     * @param string $path The path that has to be normalized
      *
-     * @return string The denormalized category path for the import file
+     * @return string The denormalized path
+     * @throws \Exception Is thrown, because the method has not yet been implemented
      */
     public function denormalize(string $path) : string
     {
