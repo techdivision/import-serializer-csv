@@ -209,7 +209,7 @@ class AdditionalAttributeCsvSerializer extends AbstractCsvSerializer
         // pack the value according to the attribute's frontend input type
         switch ($attribute[MemberNames::FRONTEND_INPUT]) {
             case FrontendInputTypes::MULTISELECT:
-                return implode($this->getMultipleValueDelimiter(), $value);
+                return $this->implode($value, $this->getMultipleValueDelimiter());
                 break;
 
             case FrontendInputTypes::BOOLEAN:
@@ -238,7 +238,7 @@ class AdditionalAttributeCsvSerializer extends AbstractCsvSerializer
         // unpack the value according to the attribute's frontend input type
         switch ($attribute[MemberNames::FRONTEND_INPUT]) {
             case FrontendInputTypes::MULTISELECT:
-                return explode($this->getMultipleValueDelimiter(), $value);
+                return $this->explode($value, $this->getMultipleValueDelimiter());
                 break;
 
             case FrontendInputTypes::BOOLEAN:
@@ -328,25 +328,38 @@ class AdditionalAttributeCsvSerializer extends AbstractCsvSerializer
     /**
      * Create a CSV compatible string from the passed category path.
      *
-     * @param string|null $value The normalized category path (usually from the DB)
+     * @param string|null $value  The normalized category path (usually from the DB)
+     * @param bool        $unpack TRUE if the option values has to be unpacked, in case of a multiselect attribute
      *
      * @return array The array with the denormalized attribute values
      */
-    public function denormalize(string $value = null) : array
+    public function denormalize(string $value = null, bool $unpack = true) : array
     {
 
         // initialize the array for the attributes
         $attrs = array();
 
-        // explode the additional attributes
-        $additionalAttributes = $this->unserialize($value);
-
-        // iterate over the attributes and append them to the row
-        if (is_array($additionalAttributes)) {
+        // explode the additional attributes and iterate
+        // over the attributes and append them to the row
+        if (is_array($additionalAttributes = $this->unserialize($value))) {
             foreach ($additionalAttributes as $additionalAttribute) {
+                // initialize the option value
+                $optionValue = '';
                 // explode attribute code/option value from the attribute
-                list ($attributeCode, $optionValue) = $this->explode($additionalAttribute, '=');
-                $attrs[$attributeCode] = $this->unpack($attributeCode, $optionValue);
+                $exploded = $this->explode($additionalAttribute, '=');
+                // initialize attribute code and option value, depending on what we've exploded
+                if (sizeof($exploded) < 1) {
+                    continue;
+                } elseif (sizeof($exploded) === 1) {
+                    list ($attributeCode) = $exploded;
+                } else {
+                    list ($attributeCode, $optionValue) = $exploded;
+                }
+                // query whether or not we've to pack the option
+                // values in case we've a multiselect input field
+                $optionValue = $unpack ? $this->unpack($attributeCode, $optionValue) : $optionValue;
+                // unpack the attribute values and add them to the array
+                $attrs[$attributeCode] = $optionValue;
             }
         }
 
@@ -361,10 +374,11 @@ class AdditionalAttributeCsvSerializer extends AbstractCsvSerializer
      * will be normalized into `"Default Category"/Gear`.
      *
      * @param array $values The category path that has to be normalized
+     * @param bool  $pack   TRUE if the option values has to be packed, in case of a multiselect attribute
      *
      * @return string The normalized category path
      */
-    public function normalize(array $values) : string
+    public function normalize(array $values, bool $pack = true) : string
     {
 
         // initialize the array for the attributes
@@ -373,7 +387,11 @@ class AdditionalAttributeCsvSerializer extends AbstractCsvSerializer
         // iterate over the attributes and append them to the row
         if (is_array($values)) {
             foreach ($values as $attributeCode => $optionValue) {
-                $attrs[] = sprintf('%s=%s', $attributeCode, $this->pack($attributeCode, $optionValue));
+                // query whether or not we've to unpack the option
+                // values in case we've a multiselect input field
+                $optionValue = $pack ? $this->pack($attributeCode, $optionValue) : $optionValue;
+                // append th eption value to the array
+                $attrs[] = sprintf('%s=%s', $attributeCode, $optionValue);
             }
         }
 
