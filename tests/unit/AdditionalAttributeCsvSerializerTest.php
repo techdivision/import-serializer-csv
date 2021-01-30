@@ -80,7 +80,7 @@ class AdditionalAttributeCsvSerializerTest extends AbstractSerializerTest
      *
      * @return void
      */
-    public function testSerializeEmptyArrayWithSuccess()
+    public function testNormalizeEmptyArrayWithSuccess()
     {
         $this->assertEquals(null, $this->additionalAttributeSerializer->normalize(array()));
     }
@@ -90,7 +90,7 @@ class AdditionalAttributeCsvSerializerTest extends AbstractSerializerTest
      *
      * @return void
      */
-    public function testSerializeWithSuccess()
+    public function testNormalizeWithSuccess()
     {
         $this->assertEquals('ac_01=ov_01,ac_02=ov_02', $this->additionalAttributeSerializer->normalize(array('ac_01' => 'ov_01', 'ac_02' => 'ov_02')));
     }
@@ -100,7 +100,7 @@ class AdditionalAttributeCsvSerializerTest extends AbstractSerializerTest
      *
      * @return void
      */
-    public function testUnserializeEmptyArrayWithSuccess()
+    public function testDenormalizeEmptyArrayWithSuccess()
     {
         $this->assertEquals(array(), $this->additionalAttributeSerializer->denormalize(null));
     }
@@ -110,7 +110,7 @@ class AdditionalAttributeCsvSerializerTest extends AbstractSerializerTest
      *
      * @return void
      */
-    public function testUnserializeWithSuccess()
+    public function testtDenormalizeWithSuccess()
     {
         $this->assertEquals(array('ac_01' => 'ov_01', 'ac_02' => 'ov_02'), $this->additionalAttributeSerializer->denormalize('"ac_01=ov_01","ac_02=ov_02"'));
     }
@@ -120,7 +120,7 @@ class AdditionalAttributeCsvSerializerTest extends AbstractSerializerTest
      *
      * @return void
      */
-    public function testUnserializeSingleAdditionalAttribute()
+    public function testtDenormalizeSingleAdditionalAttribute()
     {
         $this->assertEquals(array('delivery_date_1' => '2019011'), $this->additionalAttributeSerializer->denormalize('"delivery_date_1=2019011"'));
     }
@@ -130,7 +130,7 @@ class AdditionalAttributeCsvSerializerTest extends AbstractSerializerTest
      *
      * @return void
      */
-    public function testUnserializeWithoutValueDelimiter()
+    public function testtDenormalizeWithoutValueDelimiter()
     {
 
         // initialize the serialized value
@@ -152,7 +152,7 @@ class AdditionalAttributeCsvSerializerTest extends AbstractSerializerTest
      *
      * @return void
      */
-    public function testUnserializeWithValueDelimiter()
+    public function testtDenormalizeWithValueDelimiter()
     {
 
         // initialize the serialized value
@@ -174,7 +174,7 @@ class AdditionalAttributeCsvSerializerTest extends AbstractSerializerTest
      *
      * @return void
      */
-    public function testUnserializeWithPartialValueDelimiterAndValuesWithComma()
+    public function testtDenormalizeWithPartialValueDelimiterAndValuesWithComma()
     {
 
         // initialize the serialized value
@@ -196,7 +196,7 @@ class AdditionalAttributeCsvSerializerTest extends AbstractSerializerTest
      *
      * @return void
      */
-    public function testUnserializeWithoutValueDelimiterAndManyAttributes()
+    public function testtDenormalizeWithoutValueDelimiterAndManyAttributes()
     {
 
         // initialize the serialized value
@@ -247,7 +247,7 @@ class AdditionalAttributeCsvSerializerTest extends AbstractSerializerTest
      *
      * @return void
      */
-    public function testUnserializeWithComma()
+    public function testtDenormalizeWithComma()
     {
 
         // initialize the serialized value
@@ -275,7 +275,7 @@ class AdditionalAttributeCsvSerializerTest extends AbstractSerializerTest
      *
      * @return void
      */
-    public function testSerializeWithValueDelimiters()
+    public function testNormalizeWithValueDelimiters()
     {
 
         // initialize the expected result
@@ -297,7 +297,7 @@ class AdditionalAttributeCsvSerializerTest extends AbstractSerializerTest
      *
      * @return void
      */
-    public function testSerializeWithCommaSeparatedAndValueDelimitedValues()
+    public function testtNormalizeWithCommaSeparatedAndValueDelimitedValues()
     {
 
         // initialize the expected result
