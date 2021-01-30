@@ -22,11 +22,11 @@ namespace TechDivision\Import\Serializer\Csv;
 
 use TechDivision\Import\Serializer\SerializerInterface;
 use TechDivision\Import\Serializer\SerializerFactoryInterface;
+use TechDivision\Import\Serializer\Configuration\ConfigurationInterface;
 use TechDivision\Import\Serializer\AdditionalAttributeSerializerInterface;
 use TechDivision\Import\Serializer\Configuration\SerializerConfigurationInterface;
 use TechDivision\Import\Serializer\Csv\Utils\MemberNames;
 use TechDivision\Import\Serializer\Csv\Utils\FrontendInputTypes;
-use TechDivision\Import\Serializer\Csv\Configuration\ConfigurationInterface;
 use TechDivision\Import\Serializer\Csv\Services\EavAttributeAwareProcessorInterface;
 
 /**
@@ -80,7 +80,7 @@ class AdditionalAttributeCsvSerializer extends AbstractCsvSerializer implements 
     /**
      * Initialize the serializer with the passed CSV value serializer factory.
      *
-     * @param \TechDivision\Import\Serializer\Csv\Configuration\ConfigurationInterface         $configuration             The configuration instance
+     * @param \TechDivision\Import\Serializer\Configuration\ConfigurationInterface             $configuration             The configuration instance
      * @param \TechDivision\Import\Serializer\Csv\Services\EavAttributeAwareProcessorInterface $attributeLoader           The attribute loader instance
      * @param \TechDivision\Import\Serializer\SerializerFactoryInterface                       $valueCsvSerializerFactory The CSV value serializer factory
      */
