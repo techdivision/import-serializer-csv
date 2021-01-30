@@ -283,7 +283,7 @@ abstract class AbstractSerializerTest extends TestCase
     {
 
         // merge the default configuration with the passed on
-        $configuration = array_merge($this->defaultConfiguration, $configuration);
+        $configuration = array_merge($this->defaultConfiguration, $this->defaultCsvConfiguration, $configuration);
 
         // create a mock configuration instance
         $mockConfiguration = $this->getMockBuilder(ConfigurationInterface::class)->getMock();

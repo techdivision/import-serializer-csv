@@ -1,7 +1,7 @@
 <?php
 
 /**
- * TechDivision\Import\Serializer\Csv\Product\ValueCsvSerializerTest
+ * TechDivision\Import\Serializer\Csv\ProductCategoryCsvSerializerTest
 *
 * NOTICE OF LICENSE
 *
@@ -18,10 +18,9 @@
 * @link      http://www.techdivision.com
 */
 
-namespace TechDivision\Import\Serializer\Csv\Product;
+namespace TechDivision\Import\Serializer\Csv;
 
-use TechDivision\Import\Serializer\Csv\AbstractSerializerTest;
-use TechDivision\Import\Serializer\Csv\ValueCsvSerializer;
+use TechDivision\Import\Serializer\SerializerFactoryInterface;
 
 /**
  * Test class for the SQL statement implementation.
@@ -32,7 +31,7 @@ use TechDivision\Import\Serializer\Csv\ValueCsvSerializer;
  * @link      https://github.com/techdivision/import-serializer-csv
  * @link      http://www.techdivision.com
  */
-class ValueCsvSerializerTest extends AbstractSerializerTest
+class ProductCategoryCsvSerializerTest extends AbstractSerializerTest
 {
 
     /**
@@ -52,9 +51,14 @@ class ValueCsvSerializerTest extends AbstractSerializerTest
     protected function setUp()
     {
 
-        // create and initialize the CSV value serializer
-        $this->valueCsvSerializer = new ValueCsvSerializer();
-        $this->valueCsvSerializer->init($this->getMockSerializerConfiguration());
+        // initialize the mock for the CSV serializer
+        $valueCsvSerializer = new ValueCsvSerializer();
+        $valueCsvSerializer->init($mockConfiguration = $this->getMockSerializerConfiguration());
+
+        $valueCsvSerializerFactory = $this->getMockBuilder(SerializerFactoryInterface::class)->getMock();
+        $valueCsvSerializerFactory->expects($this->any())->method('createSerializer')->willReturn($valueCsvSerializer);
+
+        $this->valueCsvSerializer = new ProductCategoryCsvSerializer($mockConfiguration, $valueCsvSerializerFactory);
     }
 
     /**

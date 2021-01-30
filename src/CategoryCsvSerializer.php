@@ -23,7 +23,6 @@ namespace TechDivision\Import\Serializer\Csv;
 use TechDivision\Import\Serializer\SerializerInterface;
 use TechDivision\Import\Serializer\SerializerFactoryInterface;
 use TechDivision\Import\Serializer\CategorySerializerInterface;
-use TechDivision\Import\Serializer\Configuration\ConfigurationInterface;
 use TechDivision\Import\Serializer\Configuration\SerializerConfigurationInterface;
 
 /**
@@ -56,18 +55,18 @@ class CategoryCsvSerializer extends AbstractCsvSerializer implements CategorySer
     /**
      *  The configuration instance.
      *
-     * @var \TechDivision\Import\Serializer\Configuration\ConfigurationInterface
+     * @var \TechDivision\Import\Serializer\Configuration\SerializerConfigurationInterface
      */
     private $configuration;
 
     /**
      * Initialize the serializer with the passed CSV value serializer factory.
      *
-     * @param \TechDivision\Import\Serializer\Configuration\ConfigurationInterface $configuration             The configuration instance
-     * @param \TechDivision\Import\Serializer\SerializerFactoryInterface           $valueCsvSerializerFactory The CSV value serializer factory
+     * @param \TechDivision\Import\Serializer\Configuration\SerializerConfigurationInterface $configuration             The configuration instance
+     * @param \TechDivision\Import\Serializer\SerializerFactoryInterface                     $valueCsvSerializerFactory The CSV value serializer factory
      */
     public function __construct(
-        ConfigurationInterface $configuration,
+        SerializerConfigurationInterface $configuration,
         SerializerFactoryInterface $valueCsvSerializerFactory
     ) {
 
@@ -83,7 +82,7 @@ class CategoryCsvSerializer extends AbstractCsvSerializer implements CategorySer
     /**
      * Returns the configuration instance.
      *
-     * @return \TechDivision\Import\Serializer\Configuration\ConfigurationInterface The configuration instance
+     * @return \TechDivision\Import\Serializer\Configuration\SerializerConfigurationInterface The configuration instance
      */
     protected function getConfiguration()
     {

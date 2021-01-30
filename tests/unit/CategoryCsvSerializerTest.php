@@ -1,7 +1,7 @@
 <?php
 
 /**
- * TechDivision\Import\Serializer\Csv\Category\ValueCsvSerializerTest
+ * TechDivision\Import\Serializer\Csv\CategoryeCsvSerializerTest
 *
 * NOTICE OF LICENSE
 *
@@ -18,10 +18,7 @@
 * @link      http://www.techdivision.com
 */
 
-namespace TechDivision\Import\Serializer\Csv\Category;
-
-use TechDivision\Import\Serializer\Csv\AbstractSerializerTest;
-use TechDivision\Import\Serializer\Csv\ValueCsvSerializer;
+namespace TechDivision\Import\Serializer\Csv;
 
 /**
  * Test class for the SQL statement implementation.
@@ -32,7 +29,7 @@ use TechDivision\Import\Serializer\Csv\ValueCsvSerializer;
  * @link      https://github.com/techdivision/import-serializer-csv
  * @link      http://www.techdivision.com
  */
-class ValueCsvSerializerTest extends AbstractSerializerTest
+class CategoryCsvSerializerTest extends AbstractSerializerTest
 {
 
     /**

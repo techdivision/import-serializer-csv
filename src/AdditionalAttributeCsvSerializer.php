@@ -22,12 +22,12 @@ namespace TechDivision\Import\Serializer\Csv;
 
 use TechDivision\Import\Serializer\SerializerInterface;
 use TechDivision\Import\Serializer\SerializerFactoryInterface;
-use TechDivision\Import\Serializer\Configuration\ConfigurationInterface;
+use TechDivision\Import\Serializer\AdditionalAttributeSerializerInterface;
 use TechDivision\Import\Serializer\Configuration\SerializerConfigurationInterface;
 use TechDivision\Import\Serializer\Csv\Utils\MemberNames;
 use TechDivision\Import\Serializer\Csv\Utils\FrontendInputTypes;
+use TechDivision\Import\Serializer\Csv\Configuration\ConfigurationInterface;
 use TechDivision\Import\Serializer\Csv\Services\EavAttributeAwareProcessorInterface;
-use TechDivision\Import\Serializer\AdditionalAttributeSerializerInterface;
 
 /**
  * Serializer implementation that un-/serializes the additional product attribues found in the CSV file
@@ -80,7 +80,7 @@ class AdditionalAttributeCsvSerializer extends AbstractCsvSerializer implements 
     /**
      * Initialize the serializer with the passed CSV value serializer factory.
      *
-     * @param \TechDivision\Import\Serializer\Configuration\ConfigurationInterface             $configuration             The configuration instance
+     * @param \TechDivision\Import\Serializer\Csv\Configuration\ConfigurationInterface         $configuration             The configuration instance
      * @param \TechDivision\Import\Serializer\Csv\Services\EavAttributeAwareProcessorInterface $attributeLoader           The attribute loader instance
      * @param \TechDivision\Import\Serializer\SerializerFactoryInterface                       $valueCsvSerializerFactory The CSV value serializer factory
      */
@@ -97,12 +97,16 @@ class AdditionalAttributeCsvSerializer extends AbstractCsvSerializer implements 
 
         // load the entity type for the entity type defined in the configuration
         $this->entityType = $attributeLoader->getEavEntityTypeByEntityTypeCode($configuration->getEntityTypeCode());
+
+        // pre-initialize the serialize with the values
+        // found in the main configuration
+        $this->init($configuration);
     }
 
     /**
      * Returns the configuration instance.
      *
-     * @return \TechDivision\Import\Serializer\Configuration\ConfigurationInterface The configuration instance
+     * @return \TechDivision\Import\Serializer\Configuration\SerializerConfigurationInterface The configuration instance
      */
     protected function getConfiguration()
     {

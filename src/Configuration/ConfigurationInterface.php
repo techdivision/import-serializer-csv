@@ -29,7 +29,7 @@ namespace TechDivision\Import\Serializer\Csv\Configuration;
  * @link      https://github.com/techdivision/import-serializer
  * @link      http://www.techdivision.com
  */
-interface ConfigurationInterface extends \TechDivision\Import\Serializer\Configuration\ConfigurationInterface
+interface ConfigurationInterface extends CsvConfigurationInterface, \TechDivision\Import\Serializer\Configuration\ConfigurationInterface
 {
 
     /**

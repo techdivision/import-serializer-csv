@@ -67,13 +67,12 @@ class AdditionalAttributeCsvSerializerTest extends AbstractSerializerTest
 
         // initialize the mock for the CSV serializer
         $valueCsvSerializer = new ValueCsvSerializer();
-        $valueCsvSerializer->init($mockConfiguration = $this->getMockSerializerConfiguration());
+        $valueCsvSerializer->init($mockConfiguration = $this->getMockConfiguration());
         $valueCsvSerializerFactory = $this->getMockBuilder(SerializerFactoryInterface::class)->getMock();
         $valueCsvSerializerFactory->expects($this->any())->method('createSerializer')->willReturn($valueCsvSerializer);
 
         // initialize the additional attribute serializer to be tested
-        $this->additionalAttributeSerializer = new AdditionalAttributeCsvSerializer($this->getMockConfiguration(), $attributeLoader, $valueCsvSerializerFactory);
-        $this->additionalAttributeSerializer->init($mockConfiguration);
+        $this->additionalAttributeSerializer = new AdditionalAttributeCsvSerializer($mockConfiguration, $attributeLoader, $valueCsvSerializerFactory);
     }
 
     /**
