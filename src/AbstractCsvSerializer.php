@@ -1,7 +1,7 @@
 <?php
 
 /**
- * TechDivision\Import\Serializers\AbstractSerializer
+ * TechDivision\Import\Serializers\Csv\AbstractSerializer
  *
  * NOTICE OF LICENSE
  *

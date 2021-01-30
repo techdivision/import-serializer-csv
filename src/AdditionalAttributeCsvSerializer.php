@@ -1,7 +1,7 @@
 <?php
 
 /**
- * TechDivision\Import\Serializers\AdditionalAttributeCsvSerializer
+ * TechDivision\Import\Serializers\Csv\AdditionalAttributeCsvSerializer
  *
  * NOTICE OF LICENSE
  *
@@ -27,6 +27,7 @@ use TechDivision\Import\Serializer\Configuration\SerializerConfigurationInterfac
 use TechDivision\Import\Serializer\Csv\Utils\MemberNames;
 use TechDivision\Import\Serializer\Csv\Utils\FrontendInputTypes;
 use TechDivision\Import\Serializer\Csv\Services\EavAttributeAwareProcessorInterface;
+use TechDivision\Import\Serializer\AdditionalAttributeSerializerInterface;
 
 /**
  * Serializer implementation that un-/serializes the additional product attribues found in the CSV file
@@ -38,7 +39,7 @@ use TechDivision\Import\Serializer\Csv\Services\EavAttributeAwareProcessorInterf
  * @link      https://github.com/techdivision/import-serializer-csv
  * @link      http://www.techdivision.com
  */
-class AdditionalAttributeCsvSerializer extends AbstractCsvSerializer
+class AdditionalAttributeCsvSerializer extends AbstractCsvSerializer implements AdditionalAttributeSerializerInterface
 {
 
     /**

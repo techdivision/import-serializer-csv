@@ -1,7 +1,7 @@
 <?php
 
 /**
- * TechDivision\Import\Serializers\CategoryCsvSerializer
+ * TechDivision\Import\Serializers\Csv\CategoryCsvSerializer
  *
  * NOTICE OF LICENSE
  *
@@ -22,6 +22,7 @@ namespace TechDivision\Import\Serializer\Csv;
 
 use TechDivision\Import\Serializer\SerializerInterface;
 use TechDivision\Import\Serializer\SerializerFactoryInterface;
+use TechDivision\Import\Serializer\CategorySerializerInterface;
 use TechDivision\Import\Serializer\Configuration\ConfigurationInterface;
 use TechDivision\Import\Serializer\Configuration\SerializerConfigurationInterface;
 
@@ -35,7 +36,7 @@ use TechDivision\Import\Serializer\Configuration\SerializerConfigurationInterfac
  * @link      https://github.com/techdivision/import-serializer-csv
  * @link      http://www.techdivision.com
  */
-class CategoryCsvSerializer extends AbstractCsvSerializer
+class CategoryCsvSerializer extends AbstractCsvSerializer implements CategorySerializerInterface
 {
 
     /**
