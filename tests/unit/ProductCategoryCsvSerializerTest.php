@@ -400,4 +400,59 @@ class ProductCategoryCsvSerializerTest extends AbstractSerializerTest
             $this->valueCsvSerializer->unserialize(array_shift($column))
         );
     }
+
+    /**
+     * Tests if the serialize() method returns expected value for a category path,
+     * that contains an empty space, built up from an array of path elements.
+     *
+     * @return void
+     */
+    public function testSerializeProductCategoryWithCategoriesWithEmptySpace()
+    {
+
+        // initialize the array with category path elements
+        $categories = array(
+            array('Default Category', 'Testcategory')
+        );
+
+        // step 1: serialize the category path elements
+        $cats = array();
+        foreach ($categories as $category) {
+            $cats[] = $this->valueCsvSerializer->serialize($category, '/');
+        }
+
+        // step 2: serialize the category paths into the column value
+        $this->assertEquals(
+            '"""Default Category""/Testcategory"',
+            $this->valueCsvSerializer->serialize($cats)
+        );
+    }
+
+    /**
+     * Tests if the serialize() method returns expected value for multiple category paths,
+     * that contains an empty space, built up from an array of path elements.
+     *
+     * @return void
+     */
+    public function testSerializeProductCategoryWithMultipleCategoriesWithEmptySpace()
+    {
+
+        // initialize the array with category path elements
+        $categories = array(
+            array('Default Category', 'Testcategory'),
+            array('Default Category', 'Testcategory', 'Another Category')
+        );
+
+        // step 1: serialize the category path elements
+        $cats = array();
+        foreach ($categories as $category) {
+            $cats[] = $this->valueCsvSerializer->serialize($category, '/');
+        }
+
+        // step 2: serialize the category paths into the column value
+        $this->assertEquals(
+            '"""Default Category""/Testcategory","""Default Category""/Testcategory/""Another Category"""',
+            $this->valueCsvSerializer->serialize($cats)
+        );
+    }
 }
