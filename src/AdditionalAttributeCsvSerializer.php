@@ -353,7 +353,7 @@ class AdditionalAttributeCsvSerializer extends AbstractCsvSerializer implements 
                 // explode attribute code/option value from the attribute
                 $exploded = $this->explode($additionalAttribute, '=');
                 // initialize attribute code and option value, depending on what we've exploded
-                if (sizeof($exploded) < 1) {
+                if (!is_array($exploded) || sizeof($exploded) < 1) {
                     continue;
                 } elseif (sizeof($exploded) === 1) {
                     list ($attributeCode) = $exploded;
