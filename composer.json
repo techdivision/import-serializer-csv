@@ -9,7 +9,6 @@
         "techdivision/import-serializer": "dev-master"
     },
     "require-dev": {
-        "ramsey/uuid": "~3.7.3|3.8.*",
         "doctrine/dbal": "2.5.*",
         "pdepend/pdepend": "2.5.2",
         "phpmd/phpmd": "@stable",
