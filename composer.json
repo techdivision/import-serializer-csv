@@ -1,11 +1,11 @@
 {
     "name": "techdivision/import-serializer-csv",
     "description": "Pacemaker library providing basic Magento 2 import CSV serializer functionality",
-    "license": "OSL-3.0",
+    "license": "MIT",
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "php": ">=7.1.0",
+        "php": ">=7.2.0",
         "techdivision/import-serializer": "dev-master"
     },
     "require-dev": {
