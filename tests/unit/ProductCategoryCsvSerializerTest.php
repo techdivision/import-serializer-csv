@@ -42,7 +42,7 @@ class ProductCategoryCsvSerializerTest extends AbstractSerializerTest
      * @return void
      * @see \PHPUnit\Framework\TestCase::setUp()
      */
-    protected function setUp()
+    protected function setUp(): void
     {
 
         // initialize the mock for the CSV serializer

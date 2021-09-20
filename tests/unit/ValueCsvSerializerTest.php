@@ -40,7 +40,7 @@ class ValueCsvSerializerTest extends AbstractSerializerTest
      * @return void
      * @see \PHPUnit\Framework\TestCase::setUp()
      */
-    protected function setUp()
+    protected function setUp(): void
     {
 
         // create and initialize the CSV value serializer
