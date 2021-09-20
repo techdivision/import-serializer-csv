@@ -43,7 +43,7 @@ class AdditionalAttributeCsvSerializerTest extends AbstractSerializerTest
      * @return void
      * @see \PHPUnit\Framework\TestCase::setUp()
      */
-    protected function setUp()
+    protected function setUp(): void
     {
 
         // load the default attributes/entity types
