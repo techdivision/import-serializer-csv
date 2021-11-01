@@ -1,7 +1,7 @@
 <?php
 
 /**
- * TechDivision\Import\Serializers\Csv\ValueCsvSerializer
+ * TechDivision\Import\Serializer\Csv\ValueCsvSerializer
  *
  * PHP version 7
  *

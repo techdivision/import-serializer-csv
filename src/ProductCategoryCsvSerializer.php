@@ -1,7 +1,7 @@
 <?php
 
 /**
- * TechDivision\Import\Serializers\Csv\ProductCategoryCsvSerializer
+ * TechDivision\Import\Serializer\Csv\ProductCategoryCsvSerializer
  *
  * PHP version 7
  *

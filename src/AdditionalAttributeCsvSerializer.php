@@ -1,7 +1,7 @@
 <?php
 
 /**
- * TechDivision\Import\Serializers\Csv\AdditionalAttributeCsvSerializer
+ * TechDivision\Import\Serializer\Csv\AdditionalAttributeCsvSerializer
  *
  * PHP version 7
  *

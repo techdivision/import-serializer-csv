@@ -1,7 +1,7 @@
 <?php
 
 /**
- * TechDivision\Import\Serializers\Services\EavAttributeAwareProcessorInterface
+ * TechDivision\Import\Serializer\Csv\Services\EavAttributeAwareProcessorInterface
  *
  * PHP version 7
  *
