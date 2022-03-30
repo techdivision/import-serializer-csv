@@ -235,7 +235,7 @@ class ProductCategoryCsvSerializer extends AbstractCsvSerializer implements Prod
         // unserializie//serialize the category
         // elements by using a slash (/)
         foreach ($categories as $category) {
-            $normalized[] = $this->serialize($this->unserialize($category, $this->getCategoryDelimiter()), $this->getCategoryDelimiter());
+            $normalized[] = $this->serialize($this->unserialize(trim($category), $this->getCategoryDelimiter()), $this->getCategoryDelimiter());
         }
 
         // return the normalized categories

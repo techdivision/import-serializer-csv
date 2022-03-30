@@ -225,6 +225,6 @@ class CategoryCsvSerializer extends AbstractCsvSerializer implements CategorySer
      */
     public function normalize(string $path) : string
     {
-        return $this->implode($this->explode($path));
+        return $this->implode($this->explode(trim($path)));
     }
 }
