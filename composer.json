@@ -6,7 +6,7 @@
     "prefer-stable": true,
     "require": {
         "php": ">=7.3.0",
-        "techdivision/import-serializer": "dev-master"
+        "techdivision/import-serializer": "^1.0.0"
     },
     "require-dev": {
         "doctrine/dbal": "2.5.*",
