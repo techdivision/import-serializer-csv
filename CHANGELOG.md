@@ -1,3 +1,11 @@
+# Version 1.0.2
+## Bugfixes
+
+* Fix revert 1.0.1
+
+## Features
+
+* None
 # Version 1.0.1
 ## Bugfixes
 

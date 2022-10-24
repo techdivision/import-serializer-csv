@@ -238,11 +238,7 @@ class ProductCategoryCsvSerializer extends AbstractCsvSerializer implements Prod
             $normalized[] = $this->serialize($this->unserialize(trim($category), $this->getCategoryDelimiter()), $this->getCategoryDelimiter());
         }
 
-        if (count($normalized) > 1) {
-            return $this->serialize($normalized);
-        }
-
         // return the normalized categories
-        return $normalized[0];
+        return $this->serialize($normalized);
     }
 }
