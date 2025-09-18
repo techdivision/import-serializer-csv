@@ -63,7 +63,7 @@ class ValueCsvSerializer extends AbstractCsvSerializer
      *
      * @return string The serialized array
      */
-    public function serialize(array $unserialized = null, $delimiter = null)
+    public function serialize(?array $unserialized = null, $delimiter = null)
     {
 
         // do nothing, if the passed value is empty or NULL
@@ -153,7 +153,7 @@ class ValueCsvSerializer extends AbstractCsvSerializer
      * @return string|null The compatected value
      * @see  \TechDivision\Import\Serializer\SerializerInterface::serialize()
      */
-    public function implode(array $value = null, $delimiter = null)
+    public function implode(?array $value = null, $delimiter = null)
     {
 
         // set the delimiter
