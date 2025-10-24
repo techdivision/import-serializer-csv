@@ -1,3 +1,11 @@
+# Version 2.1.0
+
+## Features
+
+### PHP 8.4 Compatibility
+
+* Add PHP 8.4 support
+
 # Version 2.0.0
 
 ### PHP 8.1 Compatibility

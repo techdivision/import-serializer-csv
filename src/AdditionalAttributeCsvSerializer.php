@@ -289,7 +289,7 @@ class AdditionalAttributeCsvSerializer extends AbstractCsvSerializer implements 
      * @return string The serialized array
      * @see \TechDivision\Import\Serializer\SerializerInterface::serialize()
      */
-    public function serialize(array $unserialized = null, $delimiter = null)
+    public function serialize(?array $unserialized = null, $delimiter = null)
     {
         return $this->getValueCsvSerializer()->implode($unserialized, $delimiter ? $delimiter : $this->getMultipleFieldDelimiter());
     }
@@ -319,7 +319,7 @@ class AdditionalAttributeCsvSerializer extends AbstractCsvSerializer implements 
      * @return string|null The compatected value
      * @see \TechDivision\Import\Serializer\SerializerInterface::serialize()
      */
-    public function implode(array $value = null, $delimiter = null)
+    public function implode(?array $value = null, $delimiter = null)
     {
         return $this->serialize($value, $delimiter);
     }
@@ -332,7 +332,7 @@ class AdditionalAttributeCsvSerializer extends AbstractCsvSerializer implements 
      *
      * @return array The array with the denormalized attribute values
      */
-    public function denormalize(string $value = null, bool $unpack = true) : array
+    public function denormalize(?string $value = null, bool $unpack = true) : array
     {
 
         // initialize the array for the attributes

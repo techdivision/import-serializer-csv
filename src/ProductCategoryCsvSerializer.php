@@ -167,7 +167,7 @@ class ProductCategoryCsvSerializer extends AbstractCsvSerializer implements Prod
      * @return string|null The compatected value
      * @see \TechDivision\Import\Serializer\SerializerInterface::serialize()
      */
-    public function implode(array $value = null, $delimiter = null)
+    public function implode(?array $value = null, $delimiter = null)
     {
         return $this->serialize($value, $delimiter);
     }
@@ -195,7 +195,7 @@ class ProductCategoryCsvSerializer extends AbstractCsvSerializer implements Prod
      * @return string The serialized array
      * @see \TechDivision\Import\Serializer\SerializerInterface::serialize()
      */
-    public function serialize(array $unserialized = null, $delimiter = null)
+    public function serialize(?array $unserialized = null, $delimiter = null)
     {
         return $this->getValueCsvSerializer()->implode($unserialized, $delimiter);
     }
