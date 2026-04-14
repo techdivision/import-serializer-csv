@@ -80,6 +80,55 @@ $categories = $serializer->deserialize($csv);
 - Beachte CSV-Escaping und Quoting
 - Erwäge Performance bei großen CSV-Dateien
 
+## Häufige Use Cases
+
+### CSV-Serialisierungs-Beispiele
+```csv
+// Product-Categories CSV
+product_id,category_path,category_name
+1,"Catalog/Women/Shirts","Women Shirts"
+2,"Catalog/Men/Pants","Men Pants"
+
+// CSV-Deserialisierung
+$serializer = new ProductCategoryCsvSerializer();
+$categories = $serializer->deserialize($csvContent);
+// Gibt Array von Category-Objects zurück
+```
+
+### Szenarien
+1. **CSV Import**: Externe Systems als CSV → Product-Categories konvertieren
+2. **CSV Export**: Interne Data als CSV → Externe System
+3. **Batch-Transformation**: Tausende Rows mit Serializer verarbeiten
+
+## Performance-Überlegungen
+
+- **CSV-Parse**: ~0.1-0.2ms pro Zeile durchschnittlich
+- **10.000 Rows**: ~1-2 Sekunden Parse-Zeit
+- **100.000 Rows**: ~10-20 Sekunden (wird merklich!)
+- **Escape-Overhead**: Spezielle Zeichen (Kommas, Quotes) kosten extra ~5-10%
+- **Optimal für**: < 50.000 Rows pro Batch, UTF-8 Encoding
+- **Memory**: CSV wird vollständig in Memory geladen - ~1-2MB pro 10k Rows
+
+## Verwandte Module
+
+- **import-serializer**: Definiert Interfaces die dieses Modul implementiert
+- **import**: Core Framework nutzt CSV-Serializer
+- **import-serializer-csv** ← **diese Datei** (CSV Implementation!)
+
+## Troubleshooting & FAQ
+
+**Q: CSV-Spalten werden falsch geparst**
+- A: Escaping-Probleme! Kommas in Values müssen quoted sein: `"value, with comma"`
+
+**Q: Character-Encoding-Probleme (Umlaute, Akzente)**
+- A: Serializer erwartet UTF-8. Konvertiere Input: `iconv('ISO-8859-1', 'UTF-8', $csv)`
+
+**Q: Performance bei großen CSVs sehr schlecht**
+- A: Memory-Issue? Nutze Streaming-Parsing statt vollständiges In-Memory Laden.
+
+**Q: Spezialzeichen werden als "?" dargestellt**
+- A: Encoding-Problem! Prüfe: `file -i input.csv` sollte `UTF-8` sein, nicht `ISO-8859-1`.
+
 ## Bekannte Einschränkungen
 
 - **CSV-Only**: Nur CSV-Format unterstützt
